@@ -1,15 +1,27 @@
+import java.util.*;
+
 class Solution {
     public int[] solution(int[] prices) {
-        int[] answer = new int[prices.length];
+        int n = prices.length;
+        int[] answer = new int[n];
+        Deque<Integer> stack = new ArrayDeque<>(); // 인덱스 저장
         
-        for (int i = 0; i < prices.length; i++) {
-            int cur = prices[i];
-            int sec = 0;
-            for (int j = i + 1; j < prices.length; j++) {
-                sec++;
-                if (cur > prices[j]) break;
+        for (int i = 0; i < n; i++) {
+            
+            // 가격이 떨어지는 순간 처리
+            while(!stack.isEmpty() && prices[i] < prices[stack.peek()]) {
+                int idx = stack.pop();
+                answer[idx] = i - idx;
             }
-            answer[i] = sec;
+            
+            // 현재 인덱스 스택에 저장
+            stack.push(i);
+        }
+        
+        // 끝까지 안 떨어진 경우 처리
+        while(!stack.isEmpty()) {
+            int idx = stack.pop();
+            answer[idx] = (n - 1) - idx;
         }
         
         return answer;
