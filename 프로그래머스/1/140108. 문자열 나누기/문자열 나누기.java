@@ -22,7 +22,7 @@ class Solution {
             }
         }
 
-        if (countX != 0 || countNotX != 0) {
+        if (countX != 0 ) {
             answer++;
         }
         
