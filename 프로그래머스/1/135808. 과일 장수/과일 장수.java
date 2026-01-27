@@ -1,22 +1,15 @@
-import java.util.Arrays;
-
-import java.util.Comparator;
+import java.util.*;
 
 class Solution {
     public int solution(int k, int m, int[] score) {
         int answer = 0;
-
-        score = Arrays.stream(score)
-                .boxed()
-                .sorted(Comparator.reverseOrder())
-                .mapToInt(Integer::intValue)
-                .toArray();
-
-        for (int i = m - 1; i < score.length; i += m) {
-            answer += score[i] * m;
+        Arrays.sort(score);
+        
+        for (int i = score.length - 1; i >= 0; i -= m) {
+            if((i - m + 1) < 0) break;
+            answer += score[i - m + 1] * m;
         }
-
-
+        
         return answer;
     }
 }
