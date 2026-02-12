@@ -1,17 +1,21 @@
 class Solution {
     public int[] solution(int brown, int yellow) {
         int[] answer = new int[2];
-        int ex = brown + yellow;
-        int s = 0;
-        for (int i = 1; i < ex; i++) {
-            if (ex % i == 0) {
-                s = ex / i;
-                if (i <= s && (s - 2) * (i - 2) == yellow) {
-                    answer[0] = s;
-                    answer[1] = i;
-                }
+        int by = brown + yellow;
+        int b, y;
+        
+        
+        for (int i = 1; i < by; i++) {
+            if (by % i == 0) {
+                b = Math.max(i , by / i);
+                y = Math.min(i , by / i);
+                if ((b - 2) * (y - 2) == yellow) {
+                answer[0] = b;
+                answer[1] = y;
+            }
             }
         }
+        
         return answer;
     }
 }
