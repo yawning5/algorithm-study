@@ -1,14 +1,14 @@
-import java.util.*;
 class Solution {
     public String solution(String s) {
-        String[] index = s.split(" ");
-        int[] nums = new int[index.length];
-        
-        for (int i = 0; i < index.length; i++) {
-            nums[i] = Integer.parseInt(index[i]);
-        }
-        
-        Arrays.sort(nums);
-        return nums[0] + " " + nums[nums.length - 1];
+	int min = Integer.MAX_VALUE;
+	int max = Integer.MIN_VALUE;
+	
+	for (String token : s.split(" ")) {
+		int n = Integer.parseInt(token);
+		min = Math.min(min, n);
+		max = Math.max(max, n);
+	}
+
+        return min + " " + max;
     }
 }
