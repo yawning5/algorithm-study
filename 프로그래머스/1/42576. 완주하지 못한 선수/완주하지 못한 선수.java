@@ -1,17 +1,21 @@
-import java.util.*;
-
+import java.util.HashMap;
+import java.util.Map;
 class Solution {
     public String solution(String[] participant, String[] completion) {
-	String answer = "";
-	Map<String, Integer> man = new HashMap<String, Integer>();
-	for (String p : participant) {
-		man.merge(p, 1, Integer::sum);
-	}
-	for (String c : completion) {
-		man.computeIfPresent(c, (k, v) -> v - 1);
-	}
-	for (var eSet : man.entrySet()) {
-		if (eSet.getValue() != 0) return eSet.getKey();
+        Map<String, Integer> map = new HashMap<>();
+
+        for (String p : participant) {
+            map.merge(p, 1, Integer::sum);
+        }
+
+        for (String p : completion) {
+            map.merge(p, -1, Integer::sum);
+        }
+
+        for (Map.Entry<String, Integer> e : map.entrySet()) {
+            if (e.getValue() != 0) {
+                return e.getKey();
+            }
         }
         return null;
     }
